@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>你想帮助牛顿获得万有引力吗？</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div id="app">
+    <section id="view-portal" class="view view-portal" aria-label="首页入口">
+      <div class="home-bg-layer" role="presentation"></div>
+      <div class="home-vignette"></div>
+      <div class="portal-content">
+        <h1 class="title-line">你想帮助牛顿获得万有引力吗？</h1>
+        <p class="subtitle-line">请选择学习路径</p>
+        <div class="portal-actions">
+          <button type="button" id="btn-enter-learning" class="portal-btn">学习模块</button>
+          <button type="button" id="btn-enter-practice" class="portal-btn">实践模块</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-home" class="view view-home hidden" aria-label="实践模块入口">
+      <div class="home-bg-layer" role="presentation"></div>
+      <div class="home-vignette"></div>
+      <div class="home-stack">
+      <div class="home-content">
+      <header class="home-header">
+        <button type="button" id="btn-practice-back-home" class="btn-back btn-back-home">← 返回首页</button>
+        <h1 class="title-line">你想帮助牛顿获得万有引力吗？</h1>
+        <p class="subtitle-line">沉浸式英国旅行 · 英语口语与语法练习</p>
+      </header>
+      <div class="module-grid">
+        <button type="button" class="module-card" data-module="transport">
+          <span class="card-icon" aria-hidden="true">🚇</span>
+          <span class="card-label">交通</span>
+          <span class="card-en">Transport</span>
+        </button>
+        <button type="button" class="module-card" data-module="hotel">
+          <span class="card-icon" aria-hidden="true">🏨</span>
+          <span class="card-label">住宿</span>
+          <span class="card-en">Stay</span>
+        </button>
+        <button type="button" class="module-card" data-module="restaurant">
+          <span class="card-icon" aria-hidden="true">☕</span>
+          <span class="card-label">餐厅</span>
+          <span class="card-en">Tea Room</span>
+        </button>
+        <button type="button" class="module-card" data-module="museum">
+          <span class="card-icon" aria-hidden="true">🏛️</span>
+          <span class="card-label">景区</span>
+          <span class="card-en">Museum</span>
+        </button>
+      </div>
+      </div>
+      </div>
+    </section>
+
+    <section id="view-learn" class="view view-learn hidden" aria-label="学习场景">
+      <button type="button" id="btn-back" class="btn-back">← 返回首页</button>
+      <header class="learn-top">
+        <h2 id="learn-module-title">交通</h2>
+        <div class="learn-progress">
+          <span id="progress-text">第 1 / 9 题</span>
+        </div>
+      </header>
+
+      <main class="learn-stage">
+        <div class="npc-panel">
+          <div id="npc-svg-wrap" class="npc-svg-wrap female" aria-hidden="true">
+            <img id="npc-photo" class="npc-photo hidden" alt="场景 NPC 形象" loading="lazy">
+            <svg class="npc-svg" viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg">
+              <g fill="none" stroke="#2d3748" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <circle class="npc-head" cx="60" cy="38" r="22"/>
+                <path class="npc-hair-f" d="M38 32 Q60 8 82 32 Q78 18 60 14 Q42 18 38 32"/>
+                <path class="npc-hair-m" d="M40 28 Q60 12 80 28"/>
+                <path d="M60 60 v45"/>
+                <path d="M60 85 L35 115"/>
+                <path d="M60 85 L85 115"/>
+                <path d="M60 105 L45 175"/>
+                <path d="M60 105 L75 175"/>
+              </g>
+            </svg>
+          </div>
+          <div id="npc-name" class="npc-name">NPC</div>
+          <button type="button" id="btn-replay-audio" class="btn-replay">再听一次</button>
+          <div id="dialogue-bubble" class="dialogue-bubble" role="button" tabindex="0" aria-label="台词气泡，点击显示英文文本"></div>
+        </div>
+
+        <div class="task-panel">
+          <p id="user-task" class="user-task"></p>
+          <p id="hint-text" class="hint-text"></p>
+          <p id="feedback" class="feedback">请听 NPC 的英文，然后点击气泡查看台词。</p>
+          <div id="post-submit-actions" class="post-submit-actions hidden">
+            <button type="button" id="btn-show-ref" class="btn-ref">查看参考答案</button>
+            <p id="ref-answer-text" class="ref-answer-text hidden" aria-live="polite"></p>
+            <button type="button" id="btn-continue" class="btn-continue hidden">继续下一题</button>
+          </div>
+        </div>
+      </main>
+
+      <footer class="learn-input">
+        <input id="user-input" type="text" autocomplete="off" placeholder="用英文回答…">
+        <button type="button" id="speech-btn" class="btn-secondary">语音录入</button>
+        <button type="button" id="submit-btn" class="btn-primary">提交</button>
+        <button type="button" id="skip-btn" class="btn-skip">跳过</button>
+      </footer>
+
+      <div id="learn-pet" class="pet-tree learn-pet seedling" title="成长中的苹果树">
+        <div class="tree-trunk"></div>
+        <div class="tree-crown"></div>
+        <div id="tree-apples" class="tree-apples"></div>
+      </div>
+      <div id="ground-apples" class="ground-apples"></div>
+    </section>
+
+    <section id="view-learning-hub" class="view view-learning hidden" aria-label="学习模块首页">
+      <button type="button" id="btn-learning-back-home" class="btn-back">← 返回首页</button>
+      <header class="learning-head">
+        <h2>学习模块</h2>
+        <p id="learning-points-text">积分：0</p>
+      </header>
+      <div class="learning-grid">
+        <button type="button" id="btn-go-practice" class="learning-card">练习区</button>
+        <button type="button" id="btn-go-flip" class="learning-card">翻卡区</button>
+        <button type="button" id="btn-go-collection" class="learning-card">集卡区</button>
+        <button type="button" id="btn-go-favorites" class="learning-card">收藏区</button>
+      </div>
+    </section>
+
+    <section id="view-learning-practice" class="view view-learning hidden" aria-label="学习模块练习区">
+      <button type="button" id="btn-practice-hub-back" class="btn-back">← 返回学习模块</button>
+      <header class="learning-head">
+        <h2>练习区</h2>
+        <p id="learning-progress-text">第 1 题</p>
+        <p id="learning-stats-text">答对题数：0 ｜ 累计积分：0</p>
+      </header>
+      <main class="learn-stage learn-practice-stage">
+        <div class="npc-panel learn-practice-panel">
+          <div id="learn-practice-sentence" class="dialogue-bubble has-text"></div>
+          <div class="learn-practice-read-actions">
+            <button type="button" id="btn-learning-replay" class="btn-replay">朗读句子</button>
+            <button type="button" id="btn-learning-replay-slow" class="btn-replay">慢速朗读</button>
+          </div>
+        </div>
+        <div class="task-panel learn-practice-panel">
+          <p id="learn-practice-zh" class="user-task"></p>
+          <p id="learn-practice-feedback" class="feedback">请输入或语音跟读该句。</p>
+        </div>
+      </main>
+      <footer class="learn-input">
+        <input id="learn-practice-input" type="text" autocomplete="off" placeholder="跟读或手动输入英文…">
+        <button type="button" id="learn-practice-speech" class="btn-secondary">语音录入</button>
+        <button type="button" id="learn-practice-submit" class="btn-primary">提交</button>
+        <button type="button" id="learn-practice-skip" class="btn-skip">跳过</button>
+      </footer>
+      <div class="learning-inline-actions learn-practice-inline-actions">
+        <button type="button" id="learn-practice-favorite" class="btn-ref">收藏本题</button>
+      </div>
+    </section>
+
+    <section id="view-learning-flip" class="view view-learning hidden" aria-label="学习模块翻卡区">
+      <button type="button" id="btn-flip-back-hub" class="btn-back">← 返回学习模块</button>
+      <header class="learning-head">
+        <h2>翻卡区</h2>
+        <p id="flip-points-text">当前积分：0</p>
+      </header>
+      <div class="flip-stage">
+        <div id="flip-grid" class="flip-grid"></div>
+        <p id="flip-feedback" class="feedback">点击任意卡背开始翻卡。</p>
+      </div>
+      <div id="flip-confirm-actions" class="post-submit-actions hidden">
+        <button type="button" id="btn-flip-add" class="btn-continue">加入集卡区</button>
+        <button type="button" id="btn-flip-skip-add" class="btn-ref">本次不加入</button>
+      </div>
+    </section>
+
+    <section id="view-learning-collection" class="view view-learning hidden" aria-label="学习模块集卡区">
+      <button type="button" id="btn-collection-back-hub" class="btn-back">← 返回学习模块</button>
+      <header class="learning-head">
+        <h2>集卡区</h2>
+        <p>已加入卡片</p>
+      </header>
+      <div id="collection-list" class="collection-list"></div>
+    </section>
+
+    <section id="view-learning-favorites" class="view view-learning hidden" aria-label="学习模块收藏区">
+      <button type="button" id="btn-favorites-back-hub" class="btn-back">← 返回学习模块</button>
+      <header class="learning-head">
+        <h2>收藏区</h2>
+        <p>点击题目可进入重复练习</p>
+      </header>
+      <div id="favorites-list" class="favorites-list"></div>
+    </section>
+
+    <div id="cutscene" class="cutscene hidden" aria-live="polite">
+      <div class="cutscene-orchard"></div>
+      <div id="cutscene-tree-wrap" class="cutscene-tree-wrap">
+        <div id="cutscene-tree" class="pet-tree cutscene-tree">
+          <div class="tree-trunk"></div>
+          <div class="tree-crown lush"></div>
+          <div id="cutscene-apples" class="tree-apples"></div>
+        </div>
+      </div>
+      <div id="draggable-player" class="draggable-player">
+        <svg viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="#1e293b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="50" cy="36" r="22" fill="#fff"/>
+            <path d="M50 58 v46"/>
+            <path d="M50 82 L24 112"/>
+            <path d="M50 82 L76 112"/>
+            <path d="M50 104 L36 152"/>
+            <path d="M50 104 L64 152"/>
+          </g>
+        </svg>
+      </div>
+      <p id="cutscene-hint" class="cutscene-hint hidden">拖动右侧小人到苹果树下，碰到苹果树！</p>
+      <div id="confetti-layer" class="confetti-layer" aria-hidden="true"></div>
+      <div id="ending-text" class="ending-text hidden">恭喜你帮助牛顿发现万有引力！</div>
+    </div>
+  </div>
+  <script src="./app-asr.js"></script>
+</body>
+</html>
